@@ -25,17 +25,24 @@ def mods():
             print(i)
 
 
-def pows(primitives_only=False):
-    p = 29
+def pows_ai(a, p, primitives_only=False):
     m = Modular(p)
-    a = 2
     for i in range(p):
         if not primitives_only or gcd(i, p-1) == 1:
             print(f'{a}^{i} = {m.pow(a, i)}')
 
 
+def pows_ik(k, p):
+    m = Modular(p)
+    for i in range(p):
+        print(f'{i}^{k} = {m.pow(i, k)}')
+
+
 def gauss_lemma(a, p):
-    for i in range(1, p):
+    """
+    :param p: Odd prime
+    """
+    for i in range(1, (p+1)//2):
         b = (i * a) % p
         if b > (p-1)/2:
             b -= p
@@ -43,6 +50,4 @@ def gauss_lemma(a, p):
 
 
 if __name__ == '__main__':
-    m = Modular(7)
-    for i in range(7):
-        print(f'{i}^2 = {m.pow(i, 2)}')
+    pows_ik(2, 13)
